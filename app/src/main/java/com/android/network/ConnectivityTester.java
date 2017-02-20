@@ -4,10 +4,11 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
+
 /**
  * Created by isurangaperera on 2/20/17.
  */
-public class ConnectivityTester implements NetworkManagerInterface {
+public class ConnectivityTester implements NetworkManager {
     private Context context;
 
     public ConnectivityTester(Context context) {
