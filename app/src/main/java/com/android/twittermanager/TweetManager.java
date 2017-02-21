@@ -10,6 +10,15 @@ import twitter4j.TwitterException;
  * Created by isurangaperera on 2/21/17.
  */
 public class TweetManager  extends TwitterIO{
+    private static TweetManager singleton;
+
+    private TweetManager() {
+        super();
+    }
+
+    public TweetManager getInstance() {
+        return (singleton == null)? new TweetManager() : singleton;
+    }
 
     @Override
     public ArrayList<Status> getTweets(String userName) {
