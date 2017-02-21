@@ -16,7 +16,7 @@ public class TweetManager  extends TwitterIO{
         super();
     }
 
-    public TweetManager getInstance() {
+    public static TweetManager getInstance() {
         return (singleton == null)? new TweetManager() : singleton;
     }
 
