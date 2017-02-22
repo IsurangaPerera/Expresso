@@ -4,6 +4,8 @@ import com.android.twittermanager.TweetManager;
 import com.android.twittermanager.TwitterIO;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import twitter4j.Status;
 
 /**
@@ -23,5 +25,21 @@ public class StatusProcessor {
     public void getUserStatus(String userName ) {
         TwitterIO tManager = TweetManager.getInstance();
         this.tweetList = tManager.getTweets(userName);
+    }
+
+    private ArrayList<Token> process()throws NoTweetsException {
+        if(tweetList == null)
+            throw new NoTweetsException("No Tweets Available");
+        ArrayList<Token> tokenList = new ArrayList<Token>();
+        for(Status tweet : tweetList) {
+            String str = tweet.getText().toLowerCase();
+            str = str.replaceAll("((www\\.[^\\s]+)|(https?://[^\\s]+))", "URL")
+                    .replaceAll("@[^\\s]+", "AT_USER")
+                    .replaceAll("#(\\S+)", "$1").trim();
+            Token newToken = new Token();
+            newToken.setFeatureVector(str);
+            tokenList.add(newToken);
+        }
+        return tokenList;
     }
 }
